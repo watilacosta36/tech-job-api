@@ -1,0 +1,74 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    container_name: opensearch_tech_job
+    environment:
+      - network.host=0.0.0.0
+      - discovery.type=single-node # standalone sem cluster
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # qtd Ram p/ JVM
+      - DISABLE_SECURITY_PLUGIN=true
+    ulimits:
+      memlock: # implede que seja swapada para disco / melhora a performance
+        soft: -1
+        hard: -1
+      nofile: # limite de arquivos abertos
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - 9200:9200 # main port
+      - 9600:9600 # monitoring / performance port
+    networks:
+      - tech-job-network
+
+  db:
+    container_name: tech_job_db
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    networks:
+      - tech-job-network
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && rails s -b '0.0.0.0' -p '3000'"
+    stdin_open: true # acesso interativo p/ debugging
+    tty: true # interface de terminal
+    volumes:
+      - .:/home/tech_job
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - opensearch
+    environment:
+      ELASTICSEARCH_URL: http://opensearch:9200
+    networks:
+      - tech-job-network
+
+  # solid_queue:
+  #   build: .
+  #   command: bundle exec rake solid_queue:start
+  #   volumes:
+  #     - .:/home/tech_job
+  #   depends_on:
+  #     - db
+  #     - opensearch
+  #   environment:
+  #     ELASTICSEARCH_URL: http://opensearch:9200
+  #   networks:
+  #     - tech-job-network
+
+volumes:
+  opensearch-data:
+
+networks:
+  tech-job-network:
+    driver: bridge
