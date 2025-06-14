@@ -14,4 +14,8 @@ class JobSerializer < Panko::Serializer
     :is_active,
     :expires_at,
     :created_at
+
+    def created_at
+      object.created_at.strftime("%d/%m/%Y")
+    end
 end

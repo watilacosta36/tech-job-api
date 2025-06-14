@@ -3,9 +3,8 @@ module Api
     class JobsController < ApplicationController
       def index
         jobs = Jobs::Search.call(query_params)
-        serialized_jobs = Panko::ArraySerializer.new(jobs, each_serializer: JobSerializer).to_json
 
-        render json: serialized_jobs, status: :ok
+        render json: SerializationService.serialize(jobs, JobSerializer), status: :ok
       end
 
       private
