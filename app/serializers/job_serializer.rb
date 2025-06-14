@@ -15,6 +15,10 @@ class JobSerializer < Panko::Serializer
     :expires_at,
     :created_at
 
+    has_many :job_tags, serializer: JobTagSerializer
+    has_many :job_requirements, serializer: JobRequirementSerializer
+    has_many :job_benefits, serializer: JobBenefitSerializer
+
     def created_at
       object.created_at.strftime("%d/%m/%Y")
     end
