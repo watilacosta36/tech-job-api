@@ -17,6 +17,12 @@ module Api
         end
       end
 
+      def show
+        job = Job.find(params[:id])
+
+        render json: SerializationService.serialize(job, JobSerializer), status: :ok
+      end
+
       private
 
       def query_params = params.expect(job: [:keyword, :location])
