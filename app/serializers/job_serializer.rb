@@ -1,6 +1,6 @@
 class JobSerializer < Panko::Serializer
   attributes :id,
-    :company_id,
+    :company_name,
     :title,
     :description,
     :full_description,
@@ -21,5 +21,10 @@ class JobSerializer < Panko::Serializer
 
     def created_at
       object.created_at.strftime("%d/%m/%Y")
+    end
+
+    def company_name
+      company = Company.find_by(id: object.company_id)
+      company.name
     end
 end
