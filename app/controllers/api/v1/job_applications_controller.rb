@@ -18,7 +18,7 @@ module Api
       end
 
       def job_application_params
-        params.expect(job_application: [ :job_id, :candidate_name, :candidate_email, :candidate_phone, :resume_url,
+        params.expect(job_application: [ :job_id, :candidate_name, :candidate_email, :candidate_phone, :resume,
                                          :cover_letter, :status, :applied_at ])
       end
     end

@@ -1,14 +1,15 @@
 class JobApplication < ApplicationRecord
   belongs_to :job
 
+  has_one_attached :resume
+
   validates :candidate_name,
             :candidate_email,
             :candidate_phone,
-            :resume_url, presence: true
+            :resume, presence: true
 
   validates :candidate_email, email_format: true
   validates :candidate_phone, phone_format: true
-  validates :resume_url, url_format: true
 
   enum :status, {
     pending: 0,

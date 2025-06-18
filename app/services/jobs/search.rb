@@ -9,7 +9,7 @@ module Jobs
       @location = params[:location]
     end
 
-    def results = Job.search(query, fields: ["title^10", "description"], where: filters)
+    def results = Job.search(query, fields: %w[title^10 description], where: filters)
 
     private
 
