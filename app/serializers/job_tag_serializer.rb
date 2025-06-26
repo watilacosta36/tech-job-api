@@ -1,3 +1,3 @@
 class JobTagSerializer < Panko::Serializer
-  attributes :id , :tag
+  attributes :id, :tag
 end

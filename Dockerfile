@@ -1,7 +1,7 @@
 FROM ruby:3.4.4-bullseye
 
 RUN apt update -qq && \
-    apt install --no-install-recommends -y build-essential  postgresql-client git libpq-dev libvips pkg-config vim
+    apt install --no-install-recommends -y build-essential  postgresql-client git libpq-dev libvips pkg-config vim nano
 
 ENV BUNDLER_VERSION=2.6.9
 ENV ELASTICSEARCH_URL=http://opensearch:9200

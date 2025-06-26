@@ -25,7 +25,7 @@ module Api
 
       private
 
-      def query_params = params.expect(job: [:keyword, :location])
+      def query_params = params.expect(job: [ :keyword, :location ])
 
       def job_params
         params.require(:job).permit(
@@ -42,9 +42,9 @@ module Api
           :company_id,
           :is_active,
           :expires_at,
-          job_tags_attributes: [:tag, :_destroy],
-          job_requirements_attributes: [:requirement, :_destroy],
-          job_benefits_attributes: [:benefit, :_destroy]
+          job_tags_attributes: [ :tag, :_destroy ],
+          job_requirements_attributes: [ :requirement, :_destroy ],
+          job_benefits_attributes: [ :benefit, :_destroy ]
         )
       end
     end

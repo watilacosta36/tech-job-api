@@ -23,7 +23,7 @@ end
   currency = %w[USD EUR BRL].sample
   employment_type = rand(0..2) # ajuste conforme seus enums
   experience_level = rand(0..2) # idem
-  is_remote = [true, false].sample
+  is_remote = [ true, false ].sample
   salary_min = rand(2000..8000)
   salary_max = salary_min + rand(1000..5000)
 

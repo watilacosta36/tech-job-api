@@ -1,4 +1,4 @@
-module Jobs 
+module Jobs
   class Search
     attr_reader :keyword, :location
 

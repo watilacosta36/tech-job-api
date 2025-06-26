@@ -6,9 +6,11 @@ class Job < ApplicationRecord
 
   searchkick
 
-  accepts_nested_attributes_for :job_tags, reject_if: ->(attributes){ attributes['tag'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :job_requirements, reject_if: -> (attributes){ attributes['requirement'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :job_benefits, reject_if: -> (attributes){ attributes['benefit'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :job_tags, reject_if: ->(attributes) { attributes["tag"].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :job_requirements, reject_if: ->(attributes) { attributes["requirement"].blank? },
+                                allow_destroy: true
+  accepts_nested_attributes_for :job_benefits, reject_if: ->(attributes) { attributes["benefit"].blank? },
+                                allow_destroy: true
 
   enum :employment_type, {
     CLT: 0,

@@ -5,7 +5,7 @@ module ValueObjects
     def initialize(value)
       normalized = value.to_s.gsub(/\D/, "")
 
-      raise ArgumentError, 'Telefone inválido' unless normalized.length.between?(10, 11)
+      raise ArgumentError, "Telefone inválido" unless normalized.length.between?(10, 11)
 
       @value = normalized
     end
