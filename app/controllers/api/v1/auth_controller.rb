@@ -15,6 +15,20 @@ module Api
       end
 
       def sign_up
+        user = User.new(permitted_params)
+
+        if user.save
+          payload = { user_id: user.id }
+          access_token = JwtToken.encode(payload)
+
+          render json: {
+            success: true,
+            user:,
+            access_token:
+          }, status: :created
+        else
+          render json: { success: false }, status: :unprocessable_content
+        end
       end
 
       private

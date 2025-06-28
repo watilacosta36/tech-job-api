@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :job_benefits
       resources :job_requirements
       resources :companies
+
+      post 'auth/sign_up', to: 'auth#sign_up'
     end
   end
 
