@@ -1,7 +1,5 @@
 module Admin
   class JobPolicy < ApplicationPolicy
-    def index?
-      true
-    end
+    def index? = user.admin?
   end
 end

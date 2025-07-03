@@ -3,6 +3,7 @@ class Job < ApplicationRecord
   has_many :job_tags
   has_many :job_requirements
   has_many :job_benefits
+  has_many :job_applications, dependent: :destroy
 
   searchkick
 

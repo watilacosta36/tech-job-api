@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :companies
 
       post 'auth/sign_up', to: 'auth#sign_up'
+      post 'auth/login', to: 'auth#login'
     end
   end
 
